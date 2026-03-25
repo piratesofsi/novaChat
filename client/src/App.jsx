@@ -3,6 +3,8 @@ import { Route, Router, Routes } from "react-router-dom";
 import { io } from "socket.io-client";
 import Home from "./components/home";
 import Chatroom from "./components/Chatroom";
+import JoinRoom from "./components/Joinroom";
+
 
 
 function App() {
@@ -15,8 +17,12 @@ function App() {
       <Routes>
         {/* home */}
         <Route path="/" element={<Home />} />
-        {/* chat room  */}
+        {/* chat room  */} 
+         <Route path="/room/join" element={<JoinRoom/>} />
         <Route path="/room/:roomId" element={<Chatroom />} />
+
+      
+
 
       </Routes>
 

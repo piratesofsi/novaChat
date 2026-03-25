@@ -72,55 +72,89 @@ useEffect(() => {
 
 
 
-  return (
-    <section className="w-full relative bg-black h-screen  flex justify-center items-center">
-      <div className="min-w-[40%] h-[90vh] border rounded-2xl border-white/20 p-4 ">
-        <div className="flex flex-col   p-4 h-full  ">
-          <div className="flex justify-between pb-3">   <h2 className="text-white text-left pb-2 ">RoomId : {roomId}
+return (
+  <section className="w-full h-screen bg-gradient-to-br from-black via-gray-900 to-black flex justify-center items-center">
 
-          </h2>
-          <button className="bg-blue-500 rounded px-3 ">copy LInk</button>
-          </div>
+    <div className="w-[95%] md:w-[60%] lg:w-[40%] h-[90vh] bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col shadow-2xl">
 
-          {/* MESSAGE AREA */}
-          <div className="flex-1 overflow-y-auto p-4 border rounded border-white/20 ">
-            {/* messages will render here */}
-            {messages.map((m, i) => (
-              <p className="text-white" key={i}>{m.user}: {m.text}</p>
-            ))}
-          </div>
+      {/* HEADER */}
+      <div className="flex justify-between items-center p-4 border-b border-white/10">
+        <h2 className="text-white font-semibold">
+          Room: <span className="text-blue-400">{roomId}</span>
+        </h2>
 
-          {/* inputs  */}
-          <div className="flex gap-1 text-white mt-auto pt-3">
-            <input
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-               onKeyDown={(e)=>{
-              if(e.key==="Enter"){
-                sendMessage();
-              }
-            }}
-              className="flex-1 px-3 py-2 bg-transparent border border-gray-500 rounded"
-              placeholder="Enter your message..."
-            />
+        <div className="flex gap-2">
+          <button
+            onClick={() => navigator.clipboard.writeText(roomId)}
+            className="bg-blue-500 hover:bg-blue-600 transition px-3 py-1 rounded text-sm text-white"
+          >
+            Copy
+          </button>
 
-            <button onClick={sendMessage}
-            
-              className="text-white bg-blue-500 rounded px-4 py-2"
-            >
-              Send
-            </button>
-          </div>
-
-
-
+          <button
+            onClick={() => navigate("/")}
+            className="bg-red-500 hover:bg-red-600 transition px-3 py-1 rounded text-sm text-white"
+          >
+            Leave
+          </button>
         </div>
       </div>
 
-    </section>
+      {/* MESSAGES */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
 
+        {messages.map((m, i) => {
+          const isMe = m.user === username;
 
-  )
+          return (
+            <div
+              key={i}
+              className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[70%] px-4 py-2 rounded-xl text-sm shadow-md
+                ${isMe
+                    ? "bg-blue-500 text-white rounded-br-none"
+                    : "bg-gray-800 text-white rounded-bl-none"
+                  }`}
+              >
+                {!isMe && (
+                  <p className="text-xs text-gray-400 mb-1">{m.user}</p>
+                )}
+                <p>{m.text}</p>
+              </div>
+            </div>
+          );
+        })}
+
+      </div>
+
+      {/* INPUT */}
+      <div className="p-3 border-t border-white/10 flex gap-2 bg-black/30">
+
+        <input
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") sendMessage();
+          }}
+          className="flex-1 px-4 py-2 bg-white/10 text-white rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Type a message..."
+        />
+
+        <button
+          onClick={sendMessage}
+          className="bg-blue-500 hover:bg-blue-600 transition px-5 py-2 rounded-lg text-white font-medium"
+        >
+          Send
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+);
 
 }
 
