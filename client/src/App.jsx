@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Route, Router, Routes } from "react-router-dom";
 import { io } from "socket.io-client";
-import Home from "./components/home";
+import Home from "./components/Home";
 import Chatroom from "./components/Chatroom";
 import JoinRoom from "./components/Joinroom";
 
