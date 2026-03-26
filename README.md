@@ -13,10 +13,10 @@ https://nova-chat-wwvg.vercel.app/
 ## Preview
 
 ### Home Page
-![Home](./assets/home.png)
+![Home](./client/src/assets/home.png)
 
 ### Chat Room
-![Chat](./assets/chat.png)
+![Chat](./client/src/assets/chat.png)
 
 ---
 
